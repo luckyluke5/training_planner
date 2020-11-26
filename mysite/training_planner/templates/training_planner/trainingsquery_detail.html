@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise: {{exercise}}</title>
+</head>
+<body>
+{{trainingsquery}}<br>
+<br>
+{{trainingsquery.name}}<br>
+{{trainingsquery.description}}<br>
+{{trainingsquery.generall_exercise_query}}<br>
+{{trainingsquery.exercise_queries.all}}<br>
+{{trainingsquery.value_queries.all}}<br>
+
+--------------<br>
+{% for exercisequery in trainingsquery.query_set.possible_choices %}
+{% for exercise in exercisequery %}
+{{exercise}}
+{% endfor%}<br>
+{% endfor%}
+--------------<br>
+{% for exercisequery in trainingsquery.query_set.choices %}
+{{exercisequery}}<br>
+{% endfor%}
+
+--------------<br>
+
+{% for sequence in trainingsquery.query_set.data %}
+{{sequence}}<br>
+{% endfor%}
+</body>
+</html>
