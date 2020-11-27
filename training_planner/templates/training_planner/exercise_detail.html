@@ -1,14 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Exercise: {{exercise}}</title>
-</head>
-<body>
-{{exercise}}<br>
-{{exercise.description}}<br>
-{{exercise.range_set.all}}<br>
-{{exercise.categories.all}}<br>
-{{exercise.value_set.all}}<br>
-</body>
-</html>
+{% extends "base_exercise.html" %}
+
+
+{% block title %}  Exercise: {{exercise}}  {% endblock %}
+
+{% block content %}
+
+<h1>{{exercise.name}}</h1>
+<p><b>Description: </b>{{exercise.description}}</p>
+<h2>Ranges</h2>
+<table>
+    {% for range in exercise.range_set.all%}
+    <tr>
+        <th>{{range.unit}}</th>
+        <td>{{range.minimum}}</td>
+        <td>{{range.maximum}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Values</h2>
+
+<table>
+    {% for value in exercise.value_set.all%}
+    <tr>
+        <th>{{value.unit}}</th>
+        <td>{{value.value}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Categories</h2>
+{% regroup exercise.categories.all by category as categorie_list %}
+
+<table>
+    {% for group in categorie_list%}
+    <tr>
+        <th>{{group.grouper.name}}</th>
+        {% for option in group.list%}
+        <td>{{option.name}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'exercise_update' object.id %}">Bearbeiten</a>
+
+
+
+{% endblock %}
+
+
