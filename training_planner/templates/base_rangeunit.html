@@ -1,0 +1,10 @@
+{% extends "settings.html" %}
+
+{% block title %}Range Unit{% endblock %}
+
+
+{% block menuelement %}
+{{block.super}}
+<li class="list-group-item"><b>RangeUnit Section</b></li>
+<li class="list-group-item"><a href="{% url 'range_unit_create' %}">Create RangeUnit</a></li>
+{% endblock menuelement %}

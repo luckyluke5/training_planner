@@ -1,0 +1,10 @@
+{% extends "settings.html" %}
+
+{% block title %}Value Unit{% endblock %}
+
+
+{% block menuelement %}
+{{block.super}}
+<li class="list-group-item"><b>ValueUnit Section</b></li>
+<li class="list-group-item"><a href="{% url 'value_unit_create' %}">Create ValueUnit</a></li>
+{% endblock menuelement %}

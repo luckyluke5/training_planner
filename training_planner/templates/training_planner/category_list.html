@@ -1,9 +1,9 @@
-{% extends "base_exercise.html" %}
+{% extends "base_category.html" %}
 {% block content %}
 
 
 <ul class="list-group">
-    <li class="list-group-item"><b>Exercise Liste</b></li>
+    <li class="list-group-item"><b>Category Liste</b></li>
     {% for object in object_list %}
     <li class="list-group-item"><a href="{{object.get_absolute_url}}">{{ object.name }}</a></li>
     {% endfor %}
@@ -12,6 +12,3 @@
 
 {% endblock %}
 
-
-</body>
-</html>

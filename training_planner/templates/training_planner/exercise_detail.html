@@ -7,45 +7,74 @@
 
 <h1>{{exercise.name}}</h1>
 <p><b>Description: </b>{{exercise.description}}</p>
-<h2>Ranges</h2>
-<table>
+<br>
+<table class="table table-hover table-borderless ">
+    <tr>
+        <th  colspan="4" scope="row" class="table-primary text-center">Ranges</th>
+    </tr>
     {% for range in exercise.range_set.all%}
     <tr>
-        <th>{{range.unit}}</th>
-        <td>{{range.minimum}}</td>
-        <td>{{range.maximum}}</td>
+        <th scope="row">{{range.unit}}</th>
+        <td class="text-center">{{range.minimum|default_if_none:"~0"}}</td><td class="text-center">bis</td>  <td class="text-center">{{range.maximum|default_if_none:"infinit"}}</td>
+
+    </tr>
+    {%empty%}
+    <tr>
+        <td colspan="5" scope="row" class="text-center">---</td>
     </tr>
     {% endfor %}
-</table>
 
-<h2>Values</h2>
+    <tr>
+        <th colspan="4" scope="row" class="table-primary text-center">Values</th>
+    </tr>
 
-<table>
     {% for value in exercise.value_set.all%}
     <tr>
-        <th>{{value.unit}}</th>
-        <td>{{value.value}}</td>
+        <th scope="row">{{value.unit}}</th>
+        <td class="text-center" colspan="3">{{value.value|default_if_none:"-"}}</td>
     </tr>
-    {% endfor %}
-</table>
-
-<h2>Categories</h2>
-{% regroup exercise.categories.all by category as categorie_list %}
-
-<table>
-    {% for group in categorie_list%}
+    {%empty%}
     <tr>
-        <th>{{group.grouper.name}}</th>
-        {% for option in group.list%}
-        <td>{{option.name}}</td>
-        {% endfor %}
+        <td colspan="5" scope="row" class="text-center">---</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="5" scope="row" class="table-primary text-center">Categories</th>
+    </tr>
+
+
+    {% regroup exercise.categories.all by category as categorie_list %}
+
+
+    {% for group in categorie_list%}
+    {% for option in group.list%}
+    <tr>
+        {% if forloop.first %}
+
+            <th scope="row">{{group.grouper.name}}</th>
+        {% else %}
+            <th scope="row"></th>
+        {% endif %}
+        <td colspan="3" class="text-center">{{option.name}}</td>
+
+
+    </tr>
+    {% endfor %}
+    {%empty%}
+    <tr>
+        <td colspan="5" scope="row" class="text-center">---</td>
     </tr>
     {% endfor %}
 </table>
-<a href="{% url 'exercise_update' object.id %}">Bearbeiten</a>
-
 
 
 {% endblock %}
 
 
+{% block menuelement %}
+
+{{block.super}}
+
+<li class="list-group-item"><a href="{% url 'exercise_update' object.id %}">Exercise Update</a></li>
+<li class="list-group-item"><a href="{% url 'exercise_delete' object.id %}">Exercise Delete</a></li>
+{% endblock menuelement%}

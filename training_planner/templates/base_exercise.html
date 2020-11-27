@@ -3,8 +3,9 @@
 {% block title %}Exercises{% endblock %}
 
 
-{% block sidebar %}
-<h3>Exersise_Section</h3>
-
-{{ block.super }}
-{% endblock sidebar%}
+{% block menuelement %}
+{{block.super}}
+<li class="list-group-item"><b>Exersise Section</b></li>
+<li class="list-group-item"><a href="{% url 'exercise_list' %}">Exercise List</a></li>
+<li class="list-group-item"><a href="{% url 'exercise_create' %}">Create Exercise</a></li>
+{% endblock menuelement %}

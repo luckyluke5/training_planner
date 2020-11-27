@@ -1,19 +1,7 @@
-{% extends "base_exercise.html" %}
+{% extends "base_rangeunit.html" %}
 {% block content %}
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
-
-
-    {% for form in form.range_formset %}
-
-    {{ form.as_p }}
-    {% endfor %}
-
-
-    {% for form in form.value_formset %}
-
-    {{ form.as_p }}
-    {% endfor %}
 
     <input type="submit" value="Save">
 </form>

@@ -1,0 +1,10 @@
+{% extends "settings.html" %}
+
+{% block title %}Category{% endblock %}
+
+
+{% block menuelement %}
+{{block.super}}
+<li class="list-group-item"><b>Category Section</b></li>
+<li class="list-group-item"><a href="{% url 'category_create' %}">Create Category</a></li>
+{% endblock menuelement %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+
+{% block content%}<p>Hallo, das ist die Settings-Seite</p>
+<h3>Categories</h3>
+<p class="text-justify">
+    Mit <i>"Category"</i> ist eine Einheit gemeint, die unorderbar ist, Z.B. Trainingsteil, Trainingsschwerpunkt oder
+    Komplex.
+
+</p>
+<h3>Range Units</h3>
+<p class="text-justify">
+    Mit <i>"Range Unit"</i> ist eine Einheit gemeint, bei der man einen minmalen und einen maximalen Wert braucht um
+    eine Übung zu beschreiben, also ein Zielbereich definieren wie z.B. bei der Spieleranzahl, Anzahl zur Verfüngung
+    stehender Hilfsmittel oder Trainer.
+    Bei auslassen des minimalen Wertes wird von "nach unten hin offen" ausgegangen und mit ~0 gekennzeichnet. Bei
+    auslassen des maximalen Wertes wird von "nach oben hin offen" ausgegangen und mit infinity gekennzeichnet.
+
+</p>
+<h3>Value Units</h3>
+<p class="text-justify">
+    Mit <i>"Value Unit"</i> ist eine Einheit gemeint, bei der man nur einen Wert braucht um eine Übung zu beschreiben wie
+    z.B. bei Intensität, Dauer oder Komplexität.
+
+</p>{% endblock %}
+
+
+{% block menuelement %}
+{{block.super}}
+<li class="list-group-item"><a href="{% url 'settings' %}">Settings</a></li>
+
+<li class="list-group-item"><a href="{% url 'category_list' %}">Category List</a></li>
+
+<li class="list-group-item"><a href="{% url 'range_unit_list' %}">Range Unit List</a></li>
+
+<li class="list-group-item"><a href="{% url 'value_unit_list' %}">Value Unit List</a></li>
+{% endblock menuelement %}
