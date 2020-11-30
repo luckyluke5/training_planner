@@ -17,6 +17,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name.__str__()
 
+    def get_absolute_url(self):
+        return reverse('category_details', args=[self.pk])
+
 
 class CategoryOption(models.Model):
     name = models.CharField(max_length=200)
@@ -28,6 +31,9 @@ class CategoryOption(models.Model):
     def __str__(self):
         return " <-- ".join([self.name.__str__(), self.category.__str__()])
 
+    def get_absolute_url(self):
+        return reverse('category_option_details', args=[self.pk])
+
 
 class RangeUnit(models.Model):
     name = models.CharField(max_length=200)
@@ -35,6 +41,9 @@ class RangeUnit(models.Model):
 
     def __str__(self):
         return self.name.__str__()
+
+    def get_absolute_url(self):
+        return reverse('range_unit_details', args=[self.pk])
 
 
 class Range(models.Model):
@@ -77,6 +86,9 @@ class ValueUnit(models.Model):
 
     def __str__(self):
         return self.name.__str__()
+
+    def get_absolute_url(self):
+        return reverse('value_unit_details', args=[self.pk])
 
 
 class Value(models.Model):
