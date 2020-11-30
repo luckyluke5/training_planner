@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import path, reverse_lazy
 from django.views import generic
 
 
 from .models import ValueUnit
 
 urlpatterns = [
-    # path('list/', views.ExerciseListView.as_view(),name="exercise_list"),
+    path('list/'
+         , generic.ListView.as_view(model=ValueUnit),
+         name="value_unit_list"),
+
     path('create/',
          login_required(generic.CreateView.as_view(model=ValueUnit, fields=['name', 'description'])),
          name="value_unit_create"),
@@ -20,6 +23,6 @@ urlpatterns = [
          name="value_unit_update"),
 
     path('<slug:pk>/delete',
-         login_required(generic.DeleteView.as_view(model=ValueUnit)),
+         login_required(generic.DeleteView.as_view(model=ValueUnit,success_url=reverse_lazy('value_unit_list'))),
          name="value_unit_delete"),
 ]

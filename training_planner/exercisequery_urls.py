@@ -20,5 +20,5 @@ urlpatterns = [
 
     path('<slug:pk>/delete',
          login_required(generic.DeleteView.as_view(model=ExerciseQuery)),
-         name="exercise_delete"),
+         name="exercise_query_delete"),
 ]
