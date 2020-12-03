@@ -13,8 +13,8 @@ urlpatterns = [
     path('range_unit/',         include('training_planner.range_unit_urls')),
     path('exercise_query/',     include('training_planner.exercisequery_urls')),
     path('trainings_query/',    include('training_planner.trainingsquery_urls')),
-    path('accounts/login/',     LoginView.as_view(), name="login"),
-    path('', generic.TemplateView.as_view(template_name="home.html"),name="home"),
+
+    path('', generic.TemplateView.as_view(template_name="training_planner/home.html"),name="home"),
     path('settings', generic.TemplateView.as_view(template_name="settings.html"),name="settings")
     #    path('search/', SearchView.as_view()),
 ]
