@@ -339,15 +339,15 @@ class TrainingsQuery(models.Model):
         possible_exercises = [
             list(exerciseQueryPlacement.exercise_query.query_set(self.generall_exercise_query.query_set()))
             for exerciseQueryPlacement in self.exercisequeryplacement_set.order_by('placement')]
-        choices=[]
+        #choices=[]
         choices = [random.choice(list) for list in possible_exercises]
 
-        product = itertools.product(*possible_exercises)
+        #product = itertools.product(*possible_exercises)
 
         # print(product)
-        data = []
-        for sequence in product:
-            data.append((self.accept_exercise_sequence(sequence), sequence))
+        data = {}
+        #for sequence in product:
+        #    data.append((self.accept_exercise_sequence(sequence), sequence))
 
         # print(self.accept_exercise_sequence(choices),choices)
 

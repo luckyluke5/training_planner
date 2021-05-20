@@ -129,7 +129,7 @@ class ValueQueryForm(forms.ModelForm):
 class ExerciseQueryForm(forms.ModelForm):
     class Meta:
         model = ExerciseQuery
-        fields = ['number_of_exercises', 'category_queries']
+        fields = ['name','description','number_of_exercises', 'category_queries']
 
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None, initial=None, error_class=ErrorList,
                  label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None, renderer=None):
