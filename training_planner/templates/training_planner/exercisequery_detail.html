@@ -67,12 +67,22 @@
     {% endfor %}
 </table>
 
+{% if view.kwargs.show_results == 'show' %}
+
 <ul class="list-group">
     <li class="list-group-item"><b>Passende Übungen</b></li>
     {% for object in exercisequery.query_set %}
     <li class="list-group-item"><a href="{{object.get_absolute_url}}">{{ object.name }}</a></li>
     {% endfor %}
 </ul>
+
+{% else %}
+
+<a href="{% url 'training_planner:exercise_query_details' pk=exercisequery.id show_results='show'%}"
+   class="btn btn-primary">Show
+    Results</a>
+
+{% endif %}
 
 
 {% endblock %}

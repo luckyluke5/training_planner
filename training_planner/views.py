@@ -96,6 +96,8 @@ class ExerciseQueryDetailView(generic.DetailView):
     model = ExerciseQuery
 
 
+
+
 class ExerciseQueryUpdateView(generic.UpdateView):
     form_class = ExerciseQueryForm
     model = ExerciseQuery
