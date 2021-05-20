@@ -1,33 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Exercise: {{exercise}}</title>
-</head>
-<body>
-{{trainingsquery}}<br>
+{% extends "training_planner/base_trainingsquery.html" %}
+
+{% block content %}
+
+
 <br>
-{{trainingsquery.name}}<br>
-{{trainingsquery.description}}<br>
-{{trainingsquery.generall_exercise_query}}<br>
-{{trainingsquery.exercise_queries.all}}<br>
-{{trainingsquery.value_queries.all}}<br>
 
---------------<br>
-{% for exercisequery in trainingsquery.query_set.possible_choices %}
-{% for exercise in exercisequery %}
-{{exercise}}
-{% endfor%}<br>
-{% endfor%}
---------------<br>
-{% for exercisequery in trainingsquery.query_set.choices %}
-{{exercisequery}}<br>
-{% endfor%}
+<ul class="list-group">
+     <li class="list-group-item"><b>{{trainingsquery.name}}</b></li>
+    <li class="list-group-item">{{trainingsquery.description}}</li>
 
---------------<br>
 
-{% for sequence in trainingsquery.query_set.data %}
-{{sequence}}<br>
-{% endfor%}
-</body>
-</html>
+    <li class="list-group-item"><a href="{{trainingsquery.generall_exercise_query.get_absolute_url}}">Übergeordneter Filter</a></li>
+
+
+</ul>
+
+<br>
+
+    <h3>Filter</h3>
+
+    <ul class="list-group">
+    {% for exercisequery in trainingsquery.exercise_queries.all %}
+    <li class="list-group-item"><a href="{{exercisequery.get_absolute_url}}">{{ exercisequery.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<h3>Vorgeschlagende Übungsabfolge</h3>
+
+
+
+<ul class="list-group">
+
+    {% for exercise in trainingsquery.query_set.choices %}
+    <li class="list-group-item"><a href="{{exercise.get_absolute_url}}">{{ exercise.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<h3>Sonnstigen Übung</h3>
+
+<ul class="list-group">
+
+    {% for exercisequery in trainingsquery.query_set.possible_choices %}
+
+    <li class="list-group-item"><b>Abschnitt {{ forloop.counter }}</b></li>
+
+    {% for exercise in exercisequery %}
+
+    <li class="list-group-item"><a href="{{exercise.get_absolute_url}}">{{ exercise.name }}</a></li>
+    {% endfor %}
+    {% endfor%}
+</ul>
+
+
+
+{% endblock %}

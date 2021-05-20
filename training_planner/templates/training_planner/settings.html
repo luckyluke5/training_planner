@@ -29,11 +29,11 @@
 
 {% block menuelement %}
 {{block.super}}
-<li class="list-group-item"><a href="{% url 'settings' %}">Settings</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:settings' %}">Settings</a></li>
 
-<li class="list-group-item"><a href="{% url 'category_list' %}">Category List</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:category_list' %}">Category List</a></li>
 
-<li class="list-group-item"><a href="{% url 'range_unit_list' %}">Range Unit List</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:range_unit_list' %}">Range Unit List</a></li>
 
-<li class="list-group-item"><a href="{% url 'value_unit_list' %}">Value Unit List</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:value_unit_list' %}">Value Unit List</a></li>
 {% endblock menuelement %}

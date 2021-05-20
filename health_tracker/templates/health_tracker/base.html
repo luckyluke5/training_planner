@@ -11,10 +11,10 @@
 <body>
 
 <nav class="navbar navbar-light bg-light center">
-    <a class="navbar-brand" href="{% url 'training_planner:home'%}">Trainings Planner</a>
-    <a class="nav-link" href="{% url 'training_planner:exercise_list'%}">Exercise</a>
-    <a class="nav-link" href="{% url 'training_planner:trainings_query_list'%}">Query</a>
-    <a class="nav-link" href="{% url 'training_planner:settings'%}">Settings</a>
+    <a class="navbar-brand" href="{% url 'home'%}">Health Tracker</a>
+    <a class="nav-link" href="">A</a>
+    <a class="nav-link" href="">B</a>
+    <a class="nav-link" href="">C</a>
     <a class="nav-link" href="#">{{user}}</a>
     <a class="nav-link" href="{% url 'logout'%}">Logout</a>
 </nav>
@@ -27,13 +27,14 @@
             <ul class="list-group">
 
                 {% block menuelement %}
-                <li class="list-group-item"><a href="{%url 'training_planner:home' %}">Home</a></li>
-                <li
-                        class="list-group-item"><a href="{%url 'training_planner:csv_export' %}">Download Exercises
-                    (CSV)</a></li>
-                <li
-                        class="list-group-item"><a href="{%url 'training_planner:csv_import' %}">Upload Exercises
-                    (CSV)</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:date_create' %}">Add Date</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:value_create' %}">Add Value</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:rating_create' %}">Add Rating</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:date_list' %}">Date List</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:value_list' %}">Value List</a></li>
+                <li class="list-group-item"><a href="{%url 'health_tracker:rating_list' %}">Rating List</a></li>
+
+
                 {% endblock menuelement %}
             </ul>
             {% endblock sidebar%}

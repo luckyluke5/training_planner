@@ -2,11 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 from django.views import generic
 
+from . import views
 from .forms import ExerciseQueryForm
 from .models import ExerciseQuery
 
 urlpatterns = [
-    # path('list/', views.ExerciseListView.as_view(),name="exercise_list"),
+    path('list/', views.ExerciseListView.as_view(),name="exercise_query_list"),
     path('create/',
          login_required(generic.CreateView.as_view(model=ExerciseQuery, fields=['name', 'description'])),
          name="exercise_query_create"),

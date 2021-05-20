@@ -19,10 +19,10 @@ urlpatterns = [
          name="range_unit_details"),
 
     path('<int:pk>/update',
-         login_required(generic.UpdateView.as_view(model=RangeUnit, fields=['name', 'description', 'category'])),
+         login_required(generic.UpdateView.as_view(model=RangeUnit, fields=['name', 'description'])),
          name="range_unit_update"),
 
     path('<slug:pk>/delete',
-         login_required(generic.DeleteView.as_view(model=RangeUnit,success_url=reverse_lazy('range_unit_list'))),
+         login_required(generic.DeleteView.as_view(model=RangeUnit,success_url=reverse_lazy('training_planner:range_unit_list'))),
          name="range_unit_delete"),
 ]

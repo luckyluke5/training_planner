@@ -1,0 +1,17 @@
+{% extends "health_tracker/base.html" %}
+{% block content %}
+
+
+<ul class="list-group">
+    <li class="list-group-item"><b>Exercise Liste</b></li>
+    {% for object in object_list %}
+    <li class="list-group-item"><a href="{{object.get_absolute_url}}">{{ object.date }}      {{ object.user }}      {{ object.rating }}</a></li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
+
+
+</body>
+</html>

@@ -38,6 +38,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split("
 
 
 INSTALLED_APPS = [
+    'health_tracker.apps.HealthTrackerConfig',
     'training_planner.apps.TrainingPlannerConfig',
     'django.contrib.admin',
     'django.contrib.auth',

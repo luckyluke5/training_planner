@@ -24,6 +24,6 @@ urlpatterns = [
          name="exercise_update"),
 
     path('<slug:pk>/delete',
-         login_required(generic.DeleteView.as_view(model=Exercise, success_url=reverse_lazy('exercise_list'))),
+         login_required(generic.DeleteView.as_view(model=Exercise, success_url=reverse_lazy('training_planner:exercise_list'))),
          name="exercise_delete"),
 ]

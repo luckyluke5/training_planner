@@ -10,7 +10,7 @@
 {% block menuelement %}
 
 {{block.super}}
-{% url 'exercise_delete' object.id as the_url%}
+{% url 'training_planner:value_unit_delete' object.id as the_url%}
 
-<li class="list-group-item"><a href="{{ the_url }}">Exercise Delete</a></li>
+<li class="list-group-item"><a href="{{ the_url }}">Value Unit Delete</a></li>
 {% endblock menuelement%}

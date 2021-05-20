@@ -75,6 +75,6 @@
 
 {{block.super}}
 
-<li class="list-group-item"><a href="{% url 'exercise_update' object.id %}">Exercise Update</a></li>
-<li class="list-group-item"><a href="{% url 'exercise_delete' object.id %}">Exercise Delete</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:exercise_update' object.id %}">Exercise Update</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:exercise_delete' object.id %}">Exercise Delete</a></li>
 {% endblock menuelement%}

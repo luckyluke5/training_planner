@@ -4,9 +4,8 @@ import random
 import statistics
 
 from django.db import models
-
 # Create your models here.
-from django.db.models import F, Q
+from django.db.models import F
 from django.urls import reverse
 
 
@@ -18,7 +17,7 @@ class Category(models.Model):
         return self.name.__str__()
 
     def get_absolute_url(self):
-        return reverse('category_details', args=[self.pk])
+        return reverse('training_planner:category_details', args=[self.pk])
 
 
 class CategoryOption(models.Model):
@@ -32,7 +31,7 @@ class CategoryOption(models.Model):
         return " <-- ".join([self.name.__str__(), self.category.__str__()])
 
     def get_absolute_url(self):
-        return reverse('category_option_details', args=[self.pk])
+        return reverse('training_planner:category_option_details', args=[self.pk])
 
 
 class RangeUnit(models.Model):
@@ -43,7 +42,7 @@ class RangeUnit(models.Model):
         return self.name.__str__()
 
     def get_absolute_url(self):
-        return reverse('range_unit_details', args=[self.pk])
+        return reverse('training_planner:range_unit_details', args=[self.pk])
 
 
 class Range(models.Model):
@@ -88,7 +87,7 @@ class ValueUnit(models.Model):
         return self.name.__str__()
 
     def get_absolute_url(self):
-        return reverse('value_unit_details', args=[self.pk])
+        return reverse('training_planner:value_unit_details', args=[self.pk])
 
 
 class Value(models.Model):
@@ -158,7 +157,6 @@ class TrainingsValueQuery(models.Model):
             except Value.DoesNotExist:
                 pass
 
-
         if values:
             if self.function == TrainingsValueQuery.MEAN:
                 result = statistics.mean(values)
@@ -182,9 +180,29 @@ class Exercise(models.Model):
         return self.name.__str__()
 
     def get_absolute_url(self):
-        return reverse('exercise_details', args=[self.pk])
+        return reverse('training_planner:exercise_details', args=[self.pk])
 
-    def fitToCategories(self, categories):
+    def get_dictionary(self) -> dict:
+
+        result = {'name': self.name, 'description': self.description}
+
+        for value in self.value_set.all():
+            result[value.unit.name] = value.value
+
+        for range in self.range_set.all():
+            result[range.unit.name + "_min"] = range.minimum
+            result[range.unit.name + "_max"] = range.maximum
+
+        for category in self.categories.all():
+            result[category.category.name + "_" + category.name] = True
+
+        return result;
+
+    def fitToCategories(self, categories) -> object:
+        """
+
+        :rtype: boolean
+        """
         for category in Category.objects.all():
             category_options = self.categories.filter(category__exact=category)
             category_queries = categories.filter(category__exact=category)
@@ -221,13 +239,12 @@ class Exercise(models.Model):
 
     def fitToValueQuery(self, valueQ: ValueQuery):
         if self.value_set.filter(unit__exact=valueQ.unit).exists():
-            value=self.value_set.get(unit__exact=valueQ.unit)
-
+            value = self.value_set.get(unit__exact=valueQ.unit)
 
             if value.value:
-                if valueQ.minimum and valueQ.minimum>value.value:
+                if valueQ.minimum and valueQ.minimum > value.value:
                     return False
-                if valueQ.maximum and valueQ.maximum<value.value:
+                if valueQ.maximum and valueQ.maximum < value.value:
                     return False
 
                 return True
@@ -262,7 +279,7 @@ class ExerciseQuery(models.Model):
     number_of_exercises = models.PositiveIntegerField(default=1)
 
     def get_absolute_url(self):
-        return reverse('exercise_query_details', args=[self.pk])
+        return reverse('training_planner:exercise_query_details', args=[self.pk])
 
     def query_set(self, result=Exercise.objects.all()):
 
@@ -271,8 +288,6 @@ class ExerciseQuery(models.Model):
         for rangequery in self.rangequery_set.all():
             # result = rangequery.filterSetWithThisQuery(result)
             result = list(filter(lambda exercise: exercise.fitToRangeQuery(rangequery), result))
-
-
 
         for valuequery in self.valuequery_set.all():
             # result = valuequery.filterSetWithThisQuery(result)
@@ -315,13 +330,13 @@ class TrainingsQuery(models.Model):
         return self.name.__str__()
 
     def get_absolute_url(self):
-        return reverse('trainings_query_details', args=[self.pk])
+        return reverse('training_planner:trainings_query_details', args=[self.pk])
 
     def query_set(self):
         possible_exercises = [
             list(exerciseQueryPlacement.exercise_query.query_set(self.generall_exercise_query.query_set()))
             for exerciseQueryPlacement in self.exercisequeryplacement_set.order_by('placement')]
-
+        choices=[]
         choices = [random.choice(list) for list in possible_exercises]
 
         product = itertools.product(*possible_exercises)

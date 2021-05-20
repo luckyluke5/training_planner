@@ -13,6 +13,6 @@
 
 {{block.super}}
 
-<li class="list-group-item"><a href="{% url 'range_unit_update' object.id %}">RangeUnit Update</a></li>
-<li class="list-group-item"><a href="{% url 'range_unit_delete' object.id %}">RangeUnit Delete</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:range_unit_update' object.id %}">RangeUnit Update</a></li>
+<li class="list-group-item"><a href="{% url 'training_planner:range_unit_delete' object.id %}">RangeUnit Delete</a></li>
 {% endblock menuelement%}

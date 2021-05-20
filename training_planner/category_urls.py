@@ -22,6 +22,6 @@ urlpatterns = [
          name="category_update"),
 
     path('<slug:pk>/delete',
-         login_required(generic.DeleteView.as_view(model=Category,success_url=reverse_lazy('category_list'))),
+         login_required(generic.DeleteView.as_view(model=Category,success_url=reverse_lazy('training_planner:category_list'))),
          name="category_delete"),
 ]
