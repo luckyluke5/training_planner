@@ -184,17 +184,20 @@ class Exercise(models.Model):
 
     def get_dictionary(self) -> dict:
 
-        result = {'name': self.name, 'description': self.description}
+        result = {'name': str(self.name), 'description': str(self.description)}
 
         for value in self.value_set.all():
-            result[value.unit.name] = value.value
+            result[value.unit.name] = str(int(value.value))
 
         for range in self.range_set.all():
-            result[range.unit.name + "_min"] = range.minimum
-            result[range.unit.name + "_max"] = range.maximum
+            if range.minimum:
+                result[range.unit.name + "_min"] = str(int(range.minimum))
+
+            if range.maximum:
+                result[range.unit.name + "_max"] = str(int(range.maximum))
 
         for category in self.categories.all():
-            result[category.category.name + "_" + category.name] = True
+            result[category.category.name + "_" + category.name] = "true"
 
         return result;
 

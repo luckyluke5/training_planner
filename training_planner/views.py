@@ -53,7 +53,7 @@ def exportCSV(request):
 
         data_sheet = data_sheet.append(series)
 
-    print(data_sheet)
+    #print(data_sheet)
 
     # TODO Add Function to export csv File
     # for exercise in Exercise.object.all():
