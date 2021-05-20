@@ -15,6 +15,10 @@ urlpatterns = [
          name="trainings_query_create"),
 
     path('<slug:pk>/',
+         generic.DetailView.as_view(model=TrainingsQuery),{'show_results':'not_show'},
+         name="trainings_query_details"),
+
+    path('<slug:pk>/show_results=<str:show_results>',
          generic.DetailView.as_view(model=TrainingsQuery),
          name="trainings_query_details"),
 

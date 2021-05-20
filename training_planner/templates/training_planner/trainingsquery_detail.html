@@ -27,6 +27,8 @@
 
 <br>
 
+{% if view.kwargs.show_results == 'show' %}
+
 <h3>Vorgeschlagende Übungsabfolge</h3>
 
 
@@ -54,6 +56,15 @@
     {% endfor %}
     {% endfor%}
 </ul>
+
+{% else %}
+
+<a href="{% url 'training_planner:trainings_query_details' pk=trainingsquery.id show_results='show'%}"
+   class="btn btn-primary">Show
+    Results</a>
+
+{% endif %}
+
 
 
 

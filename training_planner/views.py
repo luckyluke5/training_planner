@@ -68,7 +68,7 @@ def exportCSV(request):
     # writer.writerow(['First row', 'Foo', 'Bar', 'Baz'])
     # writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
     #
-    response.write(data_sheet.to_csv(index=False))
+    response.write(data_sheet.to_csv(index=False,sep=';'))
 
     return response
 
